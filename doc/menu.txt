@@ -1,0 +1,39 @@
+{
+    "button" : [
+        {
+            "name" : "员工中心",
+            "sub_button" : [
+                {
+                    "type" : "view",
+                    "name" : "账号绑定",
+                    "url" : "http://www.ppk365.com/tsales-rebate/accountBound/boundview.jhtml"
+                },
+                {
+                    "type" : "view",
+                    "name" : "邀请加入",
+                    "url" : "http://www.ppk365.com/tsales-rebate/inviteJoin/inviteview.jhtml"
+                },
+                {
+                    "type" : "view",
+                    "name" : "积分商城",
+                    "url" : "http://www.ppk365.com/tsales-rebate/integralmall/score_mall"
+                },
+                {
+                    "type" : "view",
+                    "name" : "活动资讯",
+                    "url" : "http://www.ppk365.com/tsales-rebate/article/article_list"
+                }
+            ]
+        },
+        {
+            "type": "click", 
+            "name": "签到", 
+            "key": "REBATE_SING_IN"
+        }, 
+        {
+            "type": "scancode_waitmsg", 
+            "name": "扫一扫", 
+            "key": "REBATE_SCAN"
+        },
+    ]
+}
