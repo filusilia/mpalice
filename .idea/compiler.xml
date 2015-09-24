@@ -24,8 +24,16 @@
         <processorPath useClasspath="true" />
         <module name="tsales-rebate" />
       </profile>
+      <profile default="false" name="Annotation profile for mpalice" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="mpalice" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="mpalice" target="1.7" />
       <module name="tsales-rebate" target="1.7" />
     </bytecodeTargetLevel>
   </component>
