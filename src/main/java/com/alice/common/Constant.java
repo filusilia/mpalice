@@ -9,7 +9,7 @@ package com.alice.common;
 public class Constant {
 
     /**
-     * 邀请加入
+     * 菜单
      */
     public static String menu_left;
 

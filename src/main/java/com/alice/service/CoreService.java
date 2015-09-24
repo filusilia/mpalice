@@ -28,7 +28,6 @@ import com.google.gson.Gson;
 import com.alice.common.Constant;
 import com.alice.common.Logable;
 import com.alice.dao.UserMapper;
-import com.alice.entity.User;
 import com.alice.model.AccessToken;
 import com.alice.model.PageAccessToken;
 import com.alice.model.SendTextMessage;
@@ -99,12 +98,12 @@ public class CoreService extends Logable {
             }
             if (Constant.MESSAGE_TYPE_TEXT.equals(msgType)) {
                 //FIXME  文字类型
-                message.setContent("发送1，可以获取您所代理的产品列表。");
+                message.setContent("hello world");
 
             } else if (Constant.MESSAGE_TYPE_EVENT.equals(msgType)) {
                 // event 推送 类型
                 String event = requestMap.get(Constant.EVENT).toLowerCase();
-                String eventKey = requestMap.get(Constant.ENVET_KEY);
+                String eventKey = requestMap.get(Constant.EVENT_KEY);
 
                 // 订阅-用户第一次关注
                 if (Constant.EVENT_TYPE_SUBSCRIBE.equals(event)) {
@@ -116,13 +115,11 @@ public class CoreService extends Logable {
                             "O(∩_∩)O");
                 }
 
-                if (Constant.EVENT_TYPE_CLICK.equals(event)
-                        && Constant..equals(eventKey)){
+                if (Constant.EVENT_TYPE_CLICK.equals(event)){
                     // 签到点击
                     message.setContent(this.signService.addEgral(message.getToUserName()));
 
-                }else if (Constant.EVENT_TYPE_SCANCODE_WAITMSG.equals(event)
-                        && Constant.EVENT_KEY_SCAN.equals(eventKey)) {
+                }else if (Constant.EVENT_KEY_SCAN.equals(eventKey)) {
                     // 扫描结果处理
                     String code = getCode(requestMap.get("ScanResult"));
                     logger.debug("+++++++*** 扫描 code = " + code + " **** User = "
@@ -131,7 +128,6 @@ public class CoreService extends Logable {
                         message.setContent("非常抱歉！\n您扫描的二维码无效，请扫描有效的二维码！");
                         return "";
                     }
-                    message.setContent(this.scanService.addEgral(code, message.getToUserName(), "wechat"));
 
                 }
             }
@@ -350,17 +346,4 @@ public class CoreService extends Logable {
         return false;
     }
 
-    /**
-     * 真猫扫描加积分
-     *
-     * @param phone 用户手机号
-     * @param code  扫描码
-     */
-    public void addScore(String phone, String code) {
-        User user = this.userMapper.findByPhone(Long.parseLong(phone));
-        if (null != user) {
-            scanService.addEgral(code, user.getWeixin(), "ppk");
-        }
-        // System.err.println(signService.addEgral("oXlkmt66shReBYPpkCNDR9HcXu4s"));
-    }
 }
