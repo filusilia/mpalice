@@ -54,9 +54,6 @@
           <element id="library" level="project" name="Maven: io.netty:netty:3.10.4.Final" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:18.0" />
           <element id="library" level="project" name="Maven: com.google.code.simple-spring-memcached:simple-spring-memcached:3.6.0" />
-          <element id="library" level="project" name="Maven: com.google.code.simple-spring-memcached:spymemcached-provider:3.6.0" />
-          <element id="library" level="project" name="Maven: net.spy:spymemcached:2.11.7" />
-          <element id="library" level="project" name="Maven: com.google.code.simple-spring-memcached:spymemcached:2.8.4" />
           <element id="library" level="project" name="Maven: com.google.code.simple-spring-memcached:xmemcached-provider:3.6.0" />
           <element id="library" level="project" name="Maven: com.googlecode.xmemcached:xmemcached:2.0.0" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />

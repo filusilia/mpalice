@@ -16,7 +16,6 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import net.spy.memcached.MemcachedClient;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,12 +47,6 @@ public class CoreService extends Logable {
      */
     @Autowired
     private SignService signService;
-
-    /**
-     * 缓存工厂
-     */
-    @Autowired
-    private CacheFactory defaultMemcachedClient;
 
     /**
      * 会员DAO
@@ -160,23 +153,23 @@ public class CoreService extends Logable {
      * @return String
      */
     public String getAccessToken() {
-        try {
-            Cache cache = defaultMemcachedClient.getCache();
-            String access_token = cache.get("wechat_access_token", SerializationType.JAVA);
-            if (StringUtils.isNotBlank(access_token))
-                return access_token;
-            else {
-                StringBuilder url = new StringBuilder("https://api.weixin.qq.com/cgi-bin/token?");
-                url.append("grant_type=client_credential&appid=").append(Constant.appid);
-                url.append("&secret=").append(Constant.appsecret);
-                String rs = HttpClientUtil.sendGetSSLRequest(url.toString(), null);
-                access_token = new Gson().fromJson(rs, AccessToken.class).getAccess_token();
-                cache.set("wechat_access_token", 7100, access_token, SerializationType.JAVA);
-                return access_token;
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
+//        try {
+//            Cache cache = defaultMemcachedClient.getCache();
+//            String access_token = cache.get("wechat_access_token", SerializationType.JAVA);
+//            if (StringUtils.isNotBlank(access_token))
+//                return access_token;
+//            else {
+//                StringBuilder url = new StringBuilder("https://api.weixin.qq.com/cgi-bin/token?");
+//                url.append("grant_type=client_credential&appid=").append(Constant.appid);
+//                url.append("&secret=").append(Constant.appsecret);
+//                String rs = HttpClientUtil.sendGetSSLRequest(url.toString(), null);
+//                access_token = new Gson().fromJson(rs, AccessToken.class).getAccess_token();
+//                cache.set("wechat_access_token", 7100, access_token, SerializationType.JAVA);
+//                return access_token;
+//            }
+//        } catch (Exception e) {
+//            logger.error(e.getMessage(), e);
+//        }
         return "";
     }
 
@@ -263,63 +256,63 @@ public class CoreService extends Logable {
      */
     public ArrayList<String> getVerfi() throws UnsupportedEncodingException, FileNotFoundException {
 
-        ArrayList<String> arr = new ArrayList<String>();
+        ArrayList<String> arr = new ArrayList<>();
 
-        Cache cache = this.defaultMemcachedClient.getCache();
-        try {
-            if (null == cache.get("ver", SerializationType.JAVA)) {
-                //memcached取值空
-                logger.debug("-----------sorry ,now try to get memcached------------------");
-
-                String path = session.getServletContext().getRealPath("/");//得到当前应用在服务器的绝对路径
-
-                File file = new File(path + "WEB-INF/classes/verfi.properties");
-                InputStreamReader read = new InputStreamReader(new FileInputStream(file), "UTF-8");
-                BufferedReader reader = null;
-                try {
-//                    System.out.println("以行为单位读取文件内容，一次读一整行：");  
-                    reader = new BufferedReader(read);
-
-                    String tempString = null;
-                    // 一次读入一行，直到读入null为文件结束  
-                    while ((tempString = reader.readLine()) != null) {
-                        arr.add(tempString.trim().toString());
-                    }
-                    reader.close();
-
-                } catch (IOException e) {
-                    file.toPath();
-                    e.printStackTrace();
-                } finally {
-                    if (reader != null) {
-                        try {
-                            reader.close();
-                        } catch (IOException e1) {
-                        }
-                    }
-
-                }
-
-                try {
-                    cache.set("ver", 64800, arr, SerializationType.JAVA);
-                } catch (TimeoutException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (CacheException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            } else {
-                //正确获取memcached
-                arr = cache.get("ver", SerializationType.JAVA);
-            }
-        } catch (TimeoutException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (CacheException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        Cache cache = this.defaultMemcachedClient.getCache();
+//        try {
+//            if (null == cache.get("ver", SerializationType.JAVA)) {
+//                //memcached取值空
+//                logger.debug("-----------sorry ,now try to get memcached------------------");
+//
+//                String path = session.getServletContext().getRealPath("/");//得到当前应用在服务器的绝对路径
+//
+//                File file = new File(path + "WEB-INF/classes/verfi.properties");
+//                InputStreamReader read = new InputStreamReader(new FileInputStream(file), "UTF-8");
+//                BufferedReader reader = null;
+//                try {
+////                    System.out.println("以行为单位读取文件内容，一次读一整行：");
+//                    reader = new BufferedReader(read);
+//
+//                    String tempString = null;
+//                    // 一次读入一行，直到读入null为文件结束
+//                    while ((tempString = reader.readLine()) != null) {
+//                        arr.add(tempString.trim().toString());
+//                    }
+//                    reader.close();
+//
+//                } catch (IOException e) {
+//                    file.toPath();
+//                    e.printStackTrace();
+//                } finally {
+//                    if (reader != null) {
+//                        try {
+//                            reader.close();
+//                        } catch (IOException e1) {
+//                        }
+//                    }
+//
+//                }
+//
+//                try {
+//                    cache.set("ver", 64800, arr, SerializationType.JAVA);
+//                } catch (TimeoutException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                } catch (CacheException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            } else {
+//                //正确获取memcached
+//                arr = cache.get("ver", SerializationType.JAVA);
+//            }
+//        } catch (TimeoutException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } catch (CacheException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
         return arr;
     }
 
@@ -331,17 +324,17 @@ public class CoreService extends Logable {
      */
     public boolean clearMemcached() throws UnsupportedEncodingException, FileNotFoundException {
 
-        Cache cache = this.defaultMemcachedClient.getCache();
-        try {
-            cache.delete("ver");
-            return true;
-        } catch (TimeoutException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (CacheException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        Cache cache = this.defaultMemcachedClient.getCache();
+//        try {
+//            cache.delete("ver");
+//            return true;
+//        } catch (TimeoutException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } catch (CacheException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
         return false;
     }
 
