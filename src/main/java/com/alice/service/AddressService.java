@@ -12,9 +12,6 @@ import com.alice.entity.User;
 
 /**
  * 地址服务
- * 
- * @author liyongfeng
- * 
  */
 @Service
 public class AddressService {

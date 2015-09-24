@@ -4,9 +4,6 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * 用于接收验证URL有效性的参数
- * 
- * @author hyl
- * 
  */
 public class Sign extends ErrorCode {
 

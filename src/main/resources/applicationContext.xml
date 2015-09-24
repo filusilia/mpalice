@@ -30,8 +30,8 @@
 	<!-- 注入数据库连接配置文件-->
 	<import resource="classpath:mybatis.xml" />
 
-	<import resource="classpath:memcached.xml" />
 	<import resource="classpath:simplesm-context.xml" />
+	<import resource="classpath:memcached.xml" />
 
 	<bean class="com.google.code.ssm.Settings">
 		<property name="order" value="500" />

@@ -2,9 +2,6 @@ package com.alice.model;
 
 /**
  * 文本消息
- * 
- * @author hyl
- * 
  */
 public class TextMessage extends BaseModel {
 

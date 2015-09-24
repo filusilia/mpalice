@@ -16,9 +16,6 @@ import com.alice.entity.Address;
 
 /**
  * 地址DAO
- * 
- * @author hyl
- * 
  */
 @Repository
 public interface AddressMapper {

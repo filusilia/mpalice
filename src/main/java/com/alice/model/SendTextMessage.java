@@ -2,9 +2,6 @@ package com.alice.model;
 
 /**
  * 客服-发送消息实体类
- * 
- * @author hyl
- * 
  */
 public class SendTextMessage extends ErrorCode {
 

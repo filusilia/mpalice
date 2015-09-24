@@ -2,9 +2,6 @@ package com.alice.model;
 
 /**
  * 消息基类（公众帐号 -> 普通用户）
- * 
- * @author hyl
- * 
  */
 public class BaseModel extends ErrorCode {
 

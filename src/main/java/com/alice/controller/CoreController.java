@@ -20,12 +20,9 @@ import com.alice.util.SignUtil;
 
 /**
  * 微信公众平台核心Controller
- * 
- * @author hyl
- * 
  */
 @Controller
-@RequestMapping("wechat")
+@RequestMapping("core")
 public class CoreController extends Logable {
 
     /**
@@ -36,16 +33,14 @@ public class CoreController extends Logable {
 
     /**
      * 校验信息是否是从微信服务器发过来的
-     * 
-     * @param request
-     *            HttpServletRequest
-     * @param out
-     *            PrintWriter
+     *
+     * @param request HttpServletRequest
+     * @param out     PrintWriter
      */
-    @RequestMapping(method = { RequestMethod.GET })
+    @RequestMapping(method = {RequestMethod.GET})
     public void doGet(HttpServletRequest request, PrintWriter out) {
         logger.debug("-----------------------------doGet--------------------");
-        String wxToken = request.getParameter("weixin");
+        String wxToken = request.getParameter("wxtoken");
         // 微信加密签名
         String signature = request.getParameter("signature");
         // 时间戳
@@ -62,13 +57,11 @@ public class CoreController extends Logable {
 
     /**
      * 微信消息的处理
-     * 
-     * @param request
-     *            HttpServletRequest
-     * @param response
-     *            HttpServletResponse
+     *
+     * @param request  HttpServletRequest
+     * @param response HttpServletResponse
      */
-    @RequestMapping(method = { RequestMethod.POST })
+    @RequestMapping(method = {RequestMethod.POST})
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out = null;
         logger.debug("-----------------------------doPost--------------------");
@@ -91,32 +84,35 @@ public class CoreController extends Logable {
         }
     }
 
-    
+
     /**
      * 清除memcached
-     * @throws FileNotFoundException 
-     * @throws UnsupportedEncodingException 
+     *
+     * @throws FileNotFoundException
+     * @throws UnsupportedEncodingException
      */
     @RequestMapping("clearmemcached")
-    public void clearMemcached(HttpSession session,String str) throws UnsupportedEncodingException, FileNotFoundException {
+    public void clearMemcached(HttpSession session, String str) throws UnsupportedEncodingException, FileNotFoundException {
         logger.debug("************* clear start ");
-        if(coreService.clearMemcached()){
-        	 logger.debug("************* memcached clear success on ");
-        }else{
-        	logger.debug("************* memcached clear success failed ,please try again ! ");
+        if (coreService.clearMemcached()) {
+            logger.debug("************* memcached clear success on ");
+        } else {
+            logger.debug("************* memcached clear success failed ,please try again ! ");
         }
     }
-    
+
     /**
      * 测试方法
-     * @throws FileNotFoundException 
-     * @throws UnsupportedEncodingException 
+     *
+     * @throws FileNotFoundException
+     * @throws UnsupportedEncodingException
      */
     @RequestMapping("testver")
     public void testver() throws UnsupportedEncodingException, FileNotFoundException {
+        System.out.println("hello world");
         logger.debug("************* test start ");
-        logger.debug("http://www.baidu.com/45fsdf45     getcode  -->"+coreService.getCode("http://baidu.com/45fsdf45"));
-        logger.debug("http://www.baidu.com/gff/45fsdf45     getcode  -->"+coreService.getCode("http://t.baidu.com/45fsdf45"));
-        logger.debug("http://www.baidu.com/45fsdf45     getcode  -->"+coreService.getCode("http://t.baidu.com/45fsdf45"));
+        logger.debug("http://www.baidu.com/45fsdf45     getcode  -->" + coreService.getCode("http://baidu.com/45fsdf45"));
+        logger.debug("http://www.baidu.com/gff/45fsdf45     getcode  -->" + coreService.getCode("http://t.baidu.com/45fsdf45"));
+        logger.debug("http://www.baidu.com/45fsdf45     getcode  -->" + coreService.getCode("http://t.baidu.com/45fsdf45"));
     }
 }

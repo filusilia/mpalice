@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mpalice.iml" filepath="$PROJECT_DIR$/mpalice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alicemp.iml" filepath="$PROJECT_DIR$/alicemp.iml" />
     </modules>
   </component>
 </project>

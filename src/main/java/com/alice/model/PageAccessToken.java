@@ -2,9 +2,6 @@ package com.alice.model;
 
 /**
  * 网页授权实体类
- * 
- * @author hyl
- * 
  */
 public class PageAccessToken extends ErrorCode {
 

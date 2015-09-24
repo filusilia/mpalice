@@ -9,9 +9,6 @@ import com.alice.model.Sign;
 
 /**
  * 微信消息验证工具类
- * 
- * @author hyl
- * 
  */
 public class SignUtil {
 
@@ -19,11 +16,9 @@ public class SignUtil {
 
     /**
      * 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
-     * 
-     * @param wxToken
-     *            token
-     * @param tokenModel
-     *            CheckModel
+     *
+     * @param wxToken    token
+     * @param checkModel CheckModel
      * @return String
      */
     public static String checkSignature(String wxToken, Sign checkModel) {
@@ -38,8 +33,8 @@ public class SignUtil {
         logger.debug("nonce = " + nonce);
         logger.debug("echostr = " + echostr);
 
-        if (signature != null && timestamp != null & nonce != null) {
-            String[] str = { wxToken, timestamp + "", nonce + "" };
+        if (signature != null) {
+            String[] str = {wxToken, timestamp + "", nonce + ""};
             Arrays.sort(str); // 字典序排序
             String bigStr = str[0] + str[1] + str[2];
             logger.debug("bigStr = " + bigStr);

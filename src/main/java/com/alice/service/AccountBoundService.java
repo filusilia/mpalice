@@ -18,13 +18,12 @@ public class AccountBoundService extends Logable {
      *
      * @param user 用户信息
      */
-
     public Boolean accountBound(User user) {
         Map<String, Object> map = new HashMap<>();
         Boolean success = false;
         String msg = "just accountbound method run success . now return some message.";
-        map.put("success",success);
-        map.put("msg",msg);
+        map.put("success", success);
+        map.put("msg", msg);
         return success;
     }
 

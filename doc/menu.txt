@@ -1,27 +1,12 @@
 {
     "button" : [
         {
-            "name" : "员工中心",
+            "name" : "菜单栏",
             "sub_button" : [
                 {
                     "type" : "view",
                     "name" : "账号绑定",
-                    "url" : "http://www.ppk365.com/tsales-rebate/accountBound/boundview.jhtml"
-                },
-                {
-                    "type" : "view",
-                    "name" : "邀请加入",
-                    "url" : "http://www.ppk365.com/tsales-rebate/inviteJoin/inviteview.jhtml"
-                },
-                {
-                    "type" : "view",
-                    "name" : "积分商城",
-                    "url" : "http://www.ppk365.com/tsales-rebate/integralmall/score_mall"
-                },
-                {
-                    "type" : "view",
-                    "name" : "活动资讯",
-                    "url" : "http://www.ppk365.com/tsales-rebate/article/article_list"
+                    "url" : "http://1.alicemp.sinaapp.com/accountBound/boundview.html"
                 }
             ]
         },

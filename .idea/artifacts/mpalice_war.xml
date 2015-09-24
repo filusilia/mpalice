@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="mpalice:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="mpalice.war">
-      <element id="artifact" artifact-name="mpalice:war exploded" />
-    </root>
-  </artifact>
-</component>
