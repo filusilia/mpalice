@@ -2,19 +2,10 @@ package com.alice.service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import com.alice.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.google.code.ssm.Cache;
-import com.google.code.ssm.CacheFactory;
-import com.google.code.ssm.api.format.SerializationType;
 import com.alice.common.Logable;
-import com.alice.util.BizUtils;
-import com.alice.util.SendSMSUtil;
+import com.alice.entity.User;
+import org.springframework.stereotype.Service;
 
 /**
  * 账号绑定Service
@@ -23,16 +14,11 @@ import com.alice.util.SendSMSUtil;
 public class AccountBoundService extends Logable {
 
     /**
-     * 缓存工厂
-     */
-    @Autowired
-    private CacheFactory defaultMemcachedClient;
-
-    /**
      * 账号绑定
      *
      * @param user 用户信息
      */
+
     public Boolean accountBound(User user) {
         Map<String, Object> map = new HashMap<>();
         Boolean success = false;
@@ -46,19 +32,19 @@ public class AccountBoundService extends Logable {
      * 向手机发送验证码
      */
     public void sendCode(User user) {
-        Pattern p = Pattern.compile("^1[3|5|6|7|8][0-9]\\d{8}$");
-        try {
-            Matcher m = p.matcher(user.getPhone());
-            if (m.matches()) {
-                String code = BizUtils.randomNum(4);
-                Cache cache = this.defaultMemcachedClient.getCache();
-                cache.set(user.getPhone().toString(), 300, code, SerializationType.JAVA);
-                SendSMSUtil.getSendMessage(user.getPhone(), code);
-            } else {
-                logger.error("手机号格式不符合");
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
+//        Pattern p = Pattern.compile("^1[3|5|6|7|8][0-9]\\d{8}$");
+//        try {
+//            Matcher m = p.matcher(user.getPhone());
+//            if (m.matches()) {
+//                String code = BizUtils.randomNum(4);
+//                Cache cache = this.defaultMemcachedClient.getCache();
+//                cache.set(user.getPhone().toString(), 300, code, SerializationType.JAVA);
+//                SendSMSUtil.getSendMessage(user.getPhone(), code);
+//            } else {
+//                logger.error("手机号格式不符合");
+//            }
+//        } catch (Exception e) {
+//            logger.error(e.getMessage(), e);
+//        }
     }
 }

@@ -9,12 +9,9 @@ import com.alice.entity.User;
 
 /**
  * 会员Service
- * 
- * @author zhangyanhui
- * 
  */
 @Service
-public class MemberService extends Logable {
+public class UserService extends Logable {
 	
 	/**
 	 * 会员DAO

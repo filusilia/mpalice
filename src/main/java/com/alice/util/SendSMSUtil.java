@@ -1,6 +1,7 @@
 package com.alice.util;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -8,9 +9,18 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.http.Consts;
+import org.apache.http.HttpEntity;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.validator.internal.util.privilegedactions.GetMethod;
 
 /**
  * 发短信工具类
@@ -119,18 +129,33 @@ public class SendSMSUtil {
      *             抛出异常
      */
     public static boolean getSendMessage_backup(String mobile, String SMSContent) throws Exception {
-        HttpClient httpClient = new HttpClient();
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+
         logger.info("------URL---" + URL);
         String sendURL = String.format(URL, mobile, SMSContent, ECECCID, Password);
         logger.debug("----------------> sms request url = " + sendURL);
-        GetMethod method = new GetMethod(sendURL);
-        httpClient.executeMethod(method);
-        String result = new String(method.getResponseBodyAsString().getBytes("utf-8"));
-        if (!result.contains("操作成功")) {
-            return false;
-        } else {
-            return true;
+        HttpGet httpGet = new HttpGet(sendURL);           //创建org.apache.http.client.methods.HttpGet;
+
+        try {
+            CloseableHttpResponse response = httpClient.execute(httpGet); //执行GET请求
+            HttpEntity entity = response.getEntity();            //获取响应实体
+            if (null != entity) {
+                EntityUtils.toString(entity,  Consts.UTF_8);
+                EntityUtils.consume(entity); //Consume response content
+            }
+            logger.debug("请求地址: " + httpGet.getURI());
+            logger.debug("响应状态: " + response.getStatusLine());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        } finally {
+            try {
+                httpClient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
         }
+        return true;
     }
 
     /**

@@ -19,7 +19,7 @@ import com.alice.common.Constant;
 import com.alice.common.Logable;
 import com.alice.service.AccountBoundService;
 import com.alice.service.CoreService;
-import com.alice.service.MemberService;
+import com.alice.service.UserService;
 import com.alice.util.BizUtils;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,7 +46,7 @@ public class AccountBoundController extends Logable {
      * 会员Service
      */
     @Autowired
-    private MemberService memberService;
+    private UserService userService;
 
     /**
      * 账号绑定用户页面
@@ -76,7 +76,7 @@ public class AccountBoundController extends Logable {
                 HttpSession session = request.getSession();
                 session.setAttribute("openid", openid);
 
-                User user = this.memberService.findOneByWeixin(openid);
+                User user = this.userService.findOneByWeixin(openid);
                 if (user != null) {
                     session.setAttribute("userId", user.getId() + "");
                     user.setWeixin("");

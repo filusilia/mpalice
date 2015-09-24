@@ -7,7 +7,7 @@
     
     <bean name="defaultMemcachedClient" class="com.google.code.ssm.CacheFactory">
         <property name="cacheClientFactory">
-            <bean name="cacheClientFactory" class="com.google.code.ssm.providers.spymemcached.MemcacheClientFactoryImpl" />
+            <bean class="com.google.code.ssm.providers.spymemcached.MemcacheClientFactoryImpl" />
         </property>
         <property name="addressProvider">
             <bean class="com.google.code.ssm.config.DefaultAddressProvider">
@@ -16,6 +16,7 @@
         </property>
         <property name="configuration">
             <bean class="com.google.code.ssm.providers.CacheConfiguration">
+                <!--是否使用一致性哈希 -->
                 <property name="consistentHashing" value="true" />
                 <property name="operationTimeout" value="30000" />
             </bean>

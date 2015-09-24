@@ -9,9 +9,6 @@ import com.alice.common.Logable;
 
 /**
  * 签到Service
- * 
- * @author FanMing
- * 
  */
 @Service
 public class SignService extends Logable {

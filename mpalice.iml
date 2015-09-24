@@ -18,12 +18,10 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/memcached.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/mybatis.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/webContext.xml</file>
-          <file>jar://$MAVEN_REPOSITORY$/com/google/code/simple-spring-memcached/simple-spring-memcached/3.6.0/simple-spring-memcached-3.6.0.jar!/simplesm-context.xml</file>
-          <file>file://$MAVEN_REPOSITORY$/com/google/code/simple-spring-memcached/simple-spring-memcached/3.6.0/simple-spring-memcached-3.6.0.jar</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/mybatis.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/memcached.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -71,6 +69,7 @@
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: jstl:jstl:1.2" level="project" />
     <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.3.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.7" level="project" />
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
@@ -79,7 +78,6 @@
     <orderEntry type="library" name="Maven: xpp3:xpp3_min:1.1.4c" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.1" level="project" />
-    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:fluent-hc:4.5.1" level="project" />
     <orderEntry type="library" name="Maven: com.ning:async-http-client:1.9.31" level="project" />
@@ -89,10 +87,16 @@
     <orderEntry type="library" name="Maven: com.google.code.simple-spring-memcached:spymemcached-provider:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: net.spy:spymemcached:2.11.7" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.simple-spring-memcached:spymemcached:2.8.4" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.simple-spring-memcached:xmemcached-provider:3.6.0" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.xmemcached:xmemcached:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.json-lib:json-lib:jdk15:2.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1" level="project" />
   </component>
 </module>
