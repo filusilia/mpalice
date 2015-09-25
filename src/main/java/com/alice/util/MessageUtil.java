@@ -31,7 +31,7 @@ public class MessageUtil {
 
     /**
      * 解析微信发来的请求（XML）
-     * 
+     *
      * @param request
      * @return
      * @throws Exception
@@ -67,9 +67,8 @@ public class MessageUtil {
 
     /**
      * 文本消息对象转换成xml
-     * 
-     * @param textMessage
-     *            文本消息对象
+     *
+     * @param textMessage 文本消息对象
      * @return xml
      */
     public static String textMessageToXml(TextMessage textMessage) {
@@ -105,7 +104,7 @@ public class MessageUtil {
 
     /**
      * 扩展xstream，使其支持CDATA块
-     * 
+     *
      * @date 2013-05-19
      */
     private static XStream xstream = new XStream(new XppDriver() {

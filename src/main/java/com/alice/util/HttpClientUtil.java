@@ -83,7 +83,7 @@ public class HttpClientUtil {
 
     /**
      * 发送HTTP_POST请求
-     * <p/>
+     * <p>
      * 该方法为<code>sendPostRequest(String,String,boolean,String,String)</code>的简化方法
      * 该方法在对请求数据的编码和响应数据的解码时,所采用的字符集均为UTF-8
      * 当<code>isEncoder=true</code>时,其会自动对<code>sendData</code>中的[中文][|][]等特殊字符进行<code>URLEncoder.encode(string,"UTF-8")</code>
@@ -96,7 +96,7 @@ public class HttpClientUtil {
 
     /**
      * 发送HTTP_POST请求
-     * <p/>
+     * <p>
      * 当 isEncoder=true</code>时,其会自动对<code>sendData</code>中的[中文][|][]等特殊字符进行<code>URLEncoder.encode(string,encodeCharset)</code>
      *
      * @param reqURL        请求地址
@@ -146,7 +146,7 @@ public class HttpClientUtil {
 
     /**
      * 发送HTTP_POST请求
-     * <p/>
+     * <p>
      * 该方法会自动对<code>params</code>中的[中文][|][ ]等特殊字符进行<code>URLEncoder.encode(string,encodeCharset)</code>
      *
      * @param reqURL        请求地址
@@ -187,7 +187,7 @@ public class HttpClientUtil {
 
     /**
      * 发送HTTPS_POST请求
-     * <p/>
+     * <p>
      * 该方法为<code>sendPostSSLRequest(String,Map<String,String>,String,String)</code>方法的简化方法
      * 该方法在对请求数据的编码和响应数据的解码时,所采用的字符集均为UTF-8
      * 该方法会自动对<code>params</code>中的[中文][|][ ]等特殊字符进行
@@ -199,7 +199,7 @@ public class HttpClientUtil {
 
     /**
      * 发送HTTPS_POST请求
-     * <p/>
+     * <p>
      * 该方法会自动对<code>params</code>中的[中文][|][ ]等特殊字符进行<code>URLEncoder.encode(string,encodeCharset)</code>
      *
      * @param reqURL        请求地址
@@ -244,7 +244,7 @@ public class HttpClientUtil {
 
     /**
      * 发送HTTPS_POST,类型为JSON的请求
-     * <p/>
+     * <p>
      * 该方法为<code>sendPostSSLRequest(String,String,String,String)</code>方法的简化方法
      * 该方法在对请求数据的编码和响应数据的解码时,所采用的字符集均为UTF-8
      * 该方法会自动对<code>params</code>中的[中文][|][ ]等特殊字符进行
@@ -256,7 +256,7 @@ public class HttpClientUtil {
 
     /**
      * 发送HTTPS_POST，类型为JSON的请求
-     * <p/>
+     * <p>
      * 该方法会自动对<code>params</code>中的[中文][|][ ]等特殊字符进行<code>URLEncoder.encode(string,encodeCharset)</code>
      *
      * @param reqURL        请求地址
@@ -337,7 +337,7 @@ public class HttpClientUtil {
 
     /**
      * 发送HTTP_POST请求
-     * <p/>
+     * <p>
      * 本方法默认的连接超时时间为30秒,默认的读取超时时间为30秒
      *
      * @param reqURL 请求地址
@@ -359,7 +359,7 @@ public class HttpClientUtil {
 
     /**
      * 发送HTTP_POST请求
-     * <p/>
+     * <p>
      * 本方法默认的连接超时时间为30秒,默认的读取超时时间为30秒
      *
      * @param reqURL   请求地址

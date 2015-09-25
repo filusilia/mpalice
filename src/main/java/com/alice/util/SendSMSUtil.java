@@ -31,9 +31,6 @@ import org.hibernate.validator.internal.util.privilegedactions.GetMethod;
  * class="com.ppk.common.util.SendSMSUtil"> <property name="URL"
  * value="${SMS.URL}" /> <property name="ECECCID" value="${SMS.ECECCID}" />
  * <property name="Password" value="${SMS.Password}" /> </bean>
- * 
- * @author zhangyanhui
- * 
  */
 public class SendSMSUtil {
 

@@ -1,21 +1,18 @@
 package com.alice.util;
 
-import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.alice.common.Constant;
 
 /**
  * 对于字符传的生成处理
- * 
  */
 public class BizUtils {
 
     /**
      * 获取重定向url
-     * 
-     * @param url
-     *            需要重定向的URL
+     *
+     * @param url 需要重定向的URL
      * @return String
      */
     public static String toRedirect(String url) {
@@ -30,9 +27,8 @@ public class BizUtils {
 
     /**
      * 随机数字验证码
-     * 
-     * @param length
-     *            长度
+     *
+     * @param length 长度
      * @return String
      */
     public static String randomNum(int length) {

@@ -1,5 +1,7 @@
 package com.alice.util;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.Arrays;
 
 import org.slf4j.Logger;
@@ -48,6 +50,25 @@ public class SignUtil {
             }
         }
         return "error";
+    }
+
+
+    /**
+     * sha1加密算法
+     *
+     * @param key 需要加密的字符串
+     * @return 加密后的结果
+     */
+    public static String sha1(String key) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            md.update(key.getBytes());
+            String pwd = new BigInteger(1, md.digest()).toString(16);
+            return pwd;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return key;
+        }
     }
 
 }

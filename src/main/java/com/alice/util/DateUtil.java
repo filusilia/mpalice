@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.alice.util;
 
 import java.text.ParseException;
@@ -13,10 +10,6 @@ import org.apache.log4j.Logger;
 
 /**
  * 时间处理类
- * 
- * @author Michael.Zhang
- * 
- *         2011-8-1
  */
 public class DateUtil {
 
@@ -27,9 +20,8 @@ public class DateUtil {
 
     /**
      * 获取下月日期时间点
-     * 
-     * @param datetime
-     *            格式：“dd hh-mm-ss”
+     *
+     * @param datetime 格式：“dd hh-mm-ss”
      * @return 格式：“yyyy-MM-dd hh-mm-ss”
      */
     public static long getNextMonthTime(String datetime) {
@@ -58,9 +50,8 @@ public class DateUtil {
 
     /**
      * 获取下个日期时间点
-     * 
-     * @param datetime
-     *            格式：“hh-mm-ss”
+     *
+     * @param datetime 格式：“hh-mm-ss”
      * @return 格式：“yyyy-MM-dd hh-mm-ss”
      */
     public static long getNextDayTime(String datetime) {
@@ -82,9 +73,8 @@ public class DateUtil {
 
     /**
      * 通过 String 获取日期
-     * 
-     * @param strs
-     *            第一个参数 String 类型日期，默认 yyyy-MM-dd 第二个参数 dateformat
+     *
+     * @param strs 第一个参数 String 类型日期，默认 yyyy-MM-dd 第二个参数 dateformat
      * @return
      */
     public static Date getDateByString(String... strs) {
@@ -105,7 +95,7 @@ public class DateUtil {
 
     /**
      * 通过 date 返回 string
-     * 
+     *
      * @param date
      * @param strs
      * @return
@@ -119,7 +109,7 @@ public class DateUtil {
 
     /**
      * 通过时间 long 返回 string
-     * 
+     *
      * @param dateLong
      * @param strs
      * @return
@@ -133,7 +123,7 @@ public class DateUtil {
 
     /**
      * 两个日期函数比较，计算出月份的差值
-     * 
+     *
      * @param d1
      * @param d2
      * @return
@@ -151,7 +141,7 @@ public class DateUtil {
 
     /**
      * 获取当前时间的 yyyy-MM-dd格式的Date
-     * 
+     *
      * @return
      * @throws Exception
      */
@@ -163,7 +153,7 @@ public class DateUtil {
 
     /**
      * 获取明天时间，格式yyyy-MM-dd
-     * 
+     *
      * @return Date
      * @throws ParseException
      */
@@ -185,7 +175,7 @@ public class DateUtil {
 
     /**
      * 获取昨天时间，格式yyyy-MM-dd
-     * 
+     *
      * @return Date
      */
     @SuppressWarnings("static-access")

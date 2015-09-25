@@ -12,57 +12,49 @@ import net.sf.json.JSONObject;
  */
 public class JsonPluginsUtil {
 
-	/**
-	 * 将java对象转换成json字符串
-	 * 
-	 * @param bean
-	 * @return json
-	 */
-	public static String beanToJson(Object bean) {
+    /**
+     * 将java对象转换成json字符串
+     *
+     * @param bean
+     * @return json
+     */
+    public static String beanToJson(Object bean) {
 
-		JSONObject json = JSONObject.fromObject(bean);
-		return json.toString();
-	}
+        JSONObject json = JSONObject.fromObject(bean);
+        return json.toString();
+    }
 
-	/**
-	 * 从一个JSON 对象字符格式中得到一个java对象
-	 * 
-	 * @param jsonString
-	 * @param beanCalss
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T jsonToBean(String jsonString, Class<T> beanCalss) {
+    /**
+     * 从一个JSON 对象字符格式中得到一个java对象
+     *
+     * @param jsonString
+     * @param beanCalss
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T jsonToBean(String jsonString, Class<T> beanCalss) {
 
-		JSONObject jsonObject = JSONObject.fromObject(jsonString);
-		T bean = (T) JSONObject.toBean(jsonObject, beanCalss);
-		return bean;
+        JSONObject jsonObject = JSONObject.fromObject(jsonString);
+        T bean = (T) JSONObject.toBean(jsonObject, beanCalss);
+        return bean;
 
-	}
+    }
 
-	/**
-	 * 从json HASH表达式中获取一个map，改map支持嵌套功能
-	 * 
-	 * @param jsonString
-	 * @return
-	 */
-	@SuppressWarnings( { "unchecked" })
-	public static Map jsonToMap(String jsonString) {
-
-		JSONObject jsonObject = JSONObject.fromObject(jsonString);
-		Iterator keyIter = jsonObject.keys();
-		String key;
-		Object value;
-		Map valueMap = new HashMap();
-
-		while (keyIter.hasNext()) {
-
-			key = (String) keyIter.next();
-			value = jsonObject.get(key).toString();
-			valueMap.put(key, value);
-
-		}
-
-		return valueMap;
-	}
+    /**
+     * 从json HASH表达式中获取一个map，改map支持嵌套功能
+     *
+     * @param jsonString
+     * @return
+     */
+    public static Map jsonToMap(String jsonString) {
+        JSONObject jsonObject = JSONObject.fromObject(jsonString);
+        Iterator keyIter = jsonObject.keys();
+        String key;
+        Map<String, Object> valueMap = new HashMap();
+        while (keyIter.hasNext()) {
+            key = (String) keyIter.next();
+            valueMap.put(key, jsonObject.get(key).toString());
+        }
+        return valueMap;
+    }
 }

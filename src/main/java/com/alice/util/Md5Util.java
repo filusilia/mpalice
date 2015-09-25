@@ -22,9 +22,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * md5加密
- * 
- * @author hyl
- * 
  */
 public class Md5Util {
 
@@ -35,11 +32,9 @@ public class Md5Util {
 
     /**
      * 加密验证
-     * 
-     * @param params
-     *            加密参数
-     * @param skey
-     *            秘钥
+     *
+     * @param params 加密参数
+     * @param skey   秘钥
      * @return boolean
      */
     public static boolean MD5verification(Map<String, String[]> params, String skey) {
@@ -79,11 +74,9 @@ public class Md5Util {
 
     /**
      * 进行md5加密
-     * 
-     * @param params
-     *            加密参数
-     * @param skey
-     *            秘钥
+     *
+     * @param params 加密参数
+     * @param skey   秘钥
      * @return String
      */
     public static String md5(Map<String, String> params, String skey) {
@@ -103,9 +96,8 @@ public class Md5Util {
 
     /**
      * 进行md5加密
-     * 
-     * @param data
-     *            加密参数
+     *
+     * @param data 加密参数
      * @return String
      */
     public static String md5(String data) {
@@ -126,7 +118,7 @@ public class Md5Util {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return new byte[] {};
+        return new byte[]{};
 
     }
 
@@ -144,21 +136,19 @@ public class Md5Util {
         System.arraycopy(hex.toCharArray(), 0, cs, cs.length - hex.length(), hex.length());
         return new String(cs);
     }
-    
+
     /**
      * 请求参数打印
-     * 
-     * @param request
-     *            HttpServletRequest
+     *
+     * @param request HttpServletRequest
      */
-    @SuppressWarnings("unchecked")
-	public static void loggerPrint(HttpServletRequest request) {
-        Map<String, String[]> params = new HashMap<String, String[]>(request.getParameterMap());
+    public static void loggerPrint(HttpServletRequest request) {
+        Map<String, String[]> params = new HashMap<>(request.getParameterMap());
         logger.debug("=================mpalice debug print start=================");
         logger.debug("IP = " + request.getRemoteAddr());
         logger.debug("URL = " + request.getServletPath().toString());
         Set<Map.Entry<String, String[]>> set = params.entrySet();
-        for (Iterator<Map.Entry<String, String[]>> it = set.iterator(); it.hasNext();) {
+        for (Iterator<Map.Entry<String, String[]>> it = set.iterator(); it.hasNext(); ) {
             Map.Entry<String, String[]> entry = it.next();
             logger.debug("params : " + "key = " + entry.getKey() + "--->");
             String[] vals = entry.getValue();

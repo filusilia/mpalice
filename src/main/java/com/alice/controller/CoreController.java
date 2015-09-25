@@ -35,24 +35,25 @@ public class CoreController extends Logable {
      * 校验信息是否是从微信服务器发过来的
      *
      * @param request HttpServletRequest
-     * @param out     PrintWriter
      */
     @RequestMapping(method = {RequestMethod.GET})
-    public void doGet(HttpServletRequest request, PrintWriter out) {
+    public boolean doGet(HttpServletRequest request) {
         logger.debug("-----------------------------doGet--------------------");
-        String wxToken = request.getParameter("wxtoken");
-        // 微信加密签名
         String signature = request.getParameter("signature");
-        // 时间戳
         String timestamp = request.getParameter("timestamp");
-        // 随机数
         String nonce = request.getParameter("nonce");
-        // 随机字符串
-        String echostr = request.getParameter("echostr");
-        // 验证有效性
-        out.print(SignUtil.checkSignature(wxToken, new Sign(signature, timestamp, nonce, echostr)));
-        out.flush();
-        out.close();
+        if (signature != null && timestamp != null && nonce != null) {
+            String[] strSet = new String[]{"weixin", timestamp, nonce};
+            java.util.Arrays.sort(strSet);
+            String key = "";
+            for (String string : strSet) {
+                key = key + string;
+            }
+            String pwd = SignUtil.sha1(key);
+            return pwd.equals(signature);
+        } else {
+            return false;
+        }
     }
 
     /**
