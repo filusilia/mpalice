@@ -2,9 +2,6 @@ package com.alice.common;
 
 /**
  * 常量类
- * 
- * @author hyl
- * 
  */
 public class Constant {
 
@@ -17,6 +14,11 @@ public class Constant {
      * wechat token
      */
     public static String access_token = "";
+
+    /**
+     * token
+     */
+    public static String token;
 
     /**
      * 应用ID
@@ -123,6 +125,16 @@ public class Constant {
     public static void setAccess_token(String access_token) {
         Constant.access_token = access_token;
     }
+
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        Constant.token = token;
+    }
+
 
     public String getAppid() {
         return appid;

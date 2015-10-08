@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.alice.common.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alice.common.Logable;
-import com.alice.model.Sign;
 import com.alice.service.CoreService;
 import com.alice.util.SignUtil;
 
@@ -35,15 +35,28 @@ public class CoreController extends Logable {
      * 校验信息是否是从微信服务器发过来的
      *
      * @param request HttpServletRequest
+     * @param out     PrintWriter
      */
     @RequestMapping(method = {RequestMethod.GET})
-    public boolean doGet(HttpServletRequest request) {
+    public String doGet(HttpServletRequest request, PrintWriter out) {
         logger.debug("-----------------------------doGet--------------------");
+        String echostr = request.getParameter("echostr");
+        if (checkWeixinReques(request) && echostr != null) {
+            return echostr;
+        } else {
+            return "error";
+        }
+    }
+
+    /**
+     * 根据token计算signature验证是否为weixin服务端发送的消息
+     */
+    private static boolean checkWeixinReques(HttpServletRequest request) {
         String signature = request.getParameter("signature");
         String timestamp = request.getParameter("timestamp");
         String nonce = request.getParameter("nonce");
         if (signature != null && timestamp != null && nonce != null) {
-            String[] strSet = new String[]{"weixin", timestamp, nonce};
+            String[] strSet = new String[]{Constant.token, timestamp, nonce};
             java.util.Arrays.sort(strSet);
             String key = "";
             for (String string : strSet) {

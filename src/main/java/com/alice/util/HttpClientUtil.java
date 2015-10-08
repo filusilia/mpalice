@@ -383,7 +383,7 @@ public class HttpClientUtil {
             httpURLConnection.setReadTimeout(30000); // 30秒读取超时
 
             out = httpURLConnection.getOutputStream();
-            out.write(sendData.toString().getBytes());
+            out.write(sendData.getBytes());
 
             // 清空缓冲区,发送数据
             out.flush();

@@ -21,6 +21,7 @@
 	<aop:config proxy-target-class="true"/>
 
 	<bean id="constant" class="com.alice.common.Constant">
+		<property name="token" value="${wechat.token}" />
 		<property name="appid" value="${wechat.appid}" />
 		<property name="appsecret" value="${wechat.appsecret}" />
 		<property name="grant_type" value="${wechat.granttype}" />
