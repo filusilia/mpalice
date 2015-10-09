@@ -1,34 +1,22 @@
 package com.alice.service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+import com.google.code.ssm.api.format.SerializationType;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.code.ssm.Cache;
-import com.google.code.ssm.CacheFactory;
-import com.google.code.ssm.api.format.SerializationType;
-import com.google.code.ssm.providers.CacheException;
 import com.google.gson.Gson;
 import com.alice.common.Constant;
 import com.alice.common.Logable;
-import com.alice.dao.UserMapper;
-import com.alice.model.AccessToken;
 import com.alice.model.PageAccessToken;
 import com.alice.model.SendTextMessage;
 import com.alice.model.Text;
@@ -49,15 +37,6 @@ public class CoreService extends Logable {
     private SignService signService;
 
     /**
-     * 会员DAO
-     */
-    @Autowired
-    private UserMapper userMapper;
-
-    @Autowired
-    private HttpSession session;
-
-    /**
      * 处理微信发来的请求
      *
      * @param request HttpServletRequest
@@ -67,7 +46,7 @@ public class CoreService extends Logable {
         try {
             Map<String, String> requestMap = MessageUtil.parseXml(request);
             String msgType = ""; // 获取消息类型
-            if (StringUtils.isNotBlank(requestMap.get(Constant.MSG_TYPE))){
+            if (StringUtils.isNotBlank(requestMap.get(Constant.MSG_TYPE))) {
                 msgType = requestMap.get(Constant.MSG_TYPE).toLowerCase();
             }
 
@@ -84,45 +63,48 @@ public class CoreService extends Logable {
 
             switch (msgType) {
                 case Constant.MESSAGE_TYPE_TEXT:
+                    //FIXME  文字类型
+                    LocalDateTime now = LocalDateTime.now();
+                    System.out.println(now);
+                    message.setContent("hello world");
+                    break;
+                case Constant.MESSAGE_TYPE_EVENT:
+                    //FIXME event 推送 类型
+
+                    String event = requestMap.get(Constant.EVENT).toLowerCase();
+                    String eventKey = requestMap.get(Constant.EVENT_KEY);
+
+                    // 订阅-用户第一次关注
+                    if (Constant.EVENT_TYPE_SUBSCRIBE.equals(event)) {
+                        message.setContent("Master！初次见面请多关照！\n" +
+                                "这里是您的小助手晓晓！\n" +
+                                "由于我还在开发中，可能会遇到很多奇怪的问题，但我一定会努力修正的！\n" +
+                                "您可以发送“开发进度（version）”查看一下我现在拥有什么能力！\n" +
+                                "那么，以后的日子就请多关照啦！（鞠躬）\n" +
+                                "O(∩_∩)O");
+                    }
+
+                    if (Constant.EVENT_TYPE_CLICK.equals(event)) {
+                        // 签到点击
+                        message.setContent(this.signService.addEgral(message.getToUserName()));
+
+                    } else if (Constant.EVENT_KEY_SCAN.equals(eventKey)) {
+                        // 扫描结果处理
+                        String code = getCode(requestMap.get("ScanResult"));
+                        logger.debug("+++++++*** 扫描 code = " + code + " **** User = "
+                                + message.getToUserName());
+                        if ("".equals(code)) {
+                            message.setContent("非常抱歉！\n您扫描的二维码无效，请扫描有效的二维码！");
+                            return "";
+                        }
+
+                    }
+
                     break;
                 default:
                     break;
             }
-            if (Constant.MESSAGE_TYPE_TEXT.equals(msgType)) {
-                //FIXME  文字类型
-                message.setContent("hello world");
 
-            } else if (Constant.MESSAGE_TYPE_EVENT.equals(msgType)) {
-                // event 推送 类型
-                String event = requestMap.get(Constant.EVENT).toLowerCase();
-                String eventKey = requestMap.get(Constant.EVENT_KEY);
-
-                // 订阅-用户第一次关注
-                if (Constant.EVENT_TYPE_SUBSCRIBE.equals(event)) {
-                    message.setContent("Master！初次见面请多关照！\n" +
-                            "这里是您的小助手晓晓！\n" +
-                            "由于我还在开发中，可能会遇到很多奇怪的问题，但我一定会努力修正的！\n" +
-                            "您可以发送“开发进度（version）”查看一下我现在拥有什么能力！\n" +
-                            "那么，以后的日子就请多关照啦！（鞠躬）\n" +
-                            "O(∩_∩)O");
-                }
-
-                if (Constant.EVENT_TYPE_CLICK.equals(event)){
-                    // 签到点击
-                    message.setContent(this.signService.addEgral(message.getToUserName()));
-
-                }else if (Constant.EVENT_KEY_SCAN.equals(eventKey)) {
-                    // 扫描结果处理
-                    String code = getCode(requestMap.get("ScanResult"));
-                    logger.debug("+++++++*** 扫描 code = " + code + " **** User = "
-                            + message.getToUserName());
-                    if ("".equals(code)) {
-                        message.setContent("非常抱歉！\n您扫描的二维码无效，请扫描有效的二维码！");
-                        return "";
-                    }
-
-                }
-            }
             return MessageUtil.textMessageToXml(message);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -189,8 +171,7 @@ public class CoreService extends Logable {
             url.append("&grant_type=").append(Constant.grant_type.trim());
             long start = System.currentTimeMillis();
             String rs = HttpClientUtil.sendGetSSLRequest(url.toString(), null);
-            logger.debug(">>>>>>>>>>>>>> getOpenId >>>>costTime : "
-                    + (System.currentTimeMillis() - start));
+            logger.debug("—— getOpenId —— costTime : " + (System.currentTimeMillis() - start));
             Gson gson = new Gson();
             PageAccessToken pageAccessToken = gson.fromJson(rs, PageAccessToken.class);
             if (null != pageAccessToken)
@@ -239,10 +220,6 @@ public class CoreService extends Logable {
 
         }
 
-//        if (StringUtils.isNotBlank(url)
-//                && (url.contains("http://t.ppk365.com/") || url.contains("http://315net.com/"))) {
-//            return url.substring(url.length() - 12, url.length());
-//        }
         logger.debug("-----------getCode regix fail-------------------");
         return "";
     }
@@ -257,7 +234,7 @@ public class CoreService extends Logable {
     public ArrayList<String> getVerfi() throws UnsupportedEncodingException, FileNotFoundException {
 
         ArrayList<String> arr = new ArrayList<>();
-
+//
 //        Cache cache = this.defaultMemcachedClient.getCache();
 //        try {
 //            if (null == cache.get("ver", SerializationType.JAVA)) {

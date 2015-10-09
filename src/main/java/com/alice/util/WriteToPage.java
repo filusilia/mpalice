@@ -53,7 +53,7 @@ public class WriteToPage {
     }
 
     public static void writeToPage3(HttpServletResponse response, String resultData) {
-        String message = "";
+        String message;
         try {
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out = response.getWriter();

@@ -33,7 +33,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="alicemp" target="1.7" />
+      <module name="alicemp" target="1.8" />
       <module name="mpalice" target="1.7" />
     </bytecodeTargetLevel>
   </component>
