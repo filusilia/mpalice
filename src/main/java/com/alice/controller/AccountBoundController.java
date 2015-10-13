@@ -10,7 +10,6 @@ import com.alice.entity.User;
 import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,12 +20,13 @@ import com.alice.service.AccountBoundService;
 import com.alice.service.CoreService;
 import com.alice.service.UserService;
 import com.alice.util.BizUtils;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 账号绑定Controller
  */
-@Controller
+@RestController
 @RequestMapping("accountBound")
 public class AccountBoundController extends Logable {
 

@@ -10,18 +10,18 @@ import javax.servlet.http.HttpSession;
 
 import com.alice.common.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alice.common.Logable;
 import com.alice.service.CoreService;
 import com.alice.util.SignUtil;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 微信公众平台核心Controller
  */
-@Controller
+@RestController
 @RequestMapping("core")
 public class CoreController extends Logable {
 

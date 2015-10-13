@@ -3,7 +3,6 @@ package com.alice.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,9 +11,9 @@ import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alice.entity.Address;
@@ -23,7 +22,7 @@ import com.alice.service.AddressService;
 /**
  * 地址Controller
  */
-@Controller
+@RestController
 @RequestMapping("address")
 public class AddressController {
 

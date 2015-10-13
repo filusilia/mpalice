@@ -1,18 +1,15 @@
 package com.alice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alice.service.SignService;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 签到Controller
- * 
- * @author FanMing
- * 
  */
-@Controller
+@RestController
 @RequestMapping("sign")
 public class SignController {
 
